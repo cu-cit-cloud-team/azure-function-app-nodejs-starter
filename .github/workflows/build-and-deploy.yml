@@ -1,0 +1,97 @@
+name: Build & Deploy
+
+on:
+  # allows manual runs of the workflow
+  workflow_dispatch:
+
+  # uncomment lines 8-18 to run automatically on closed PRs (conditional on line 30 makes sure PR was closed via merge)
+  # pull_request:
+  #   types: [closed]
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - "**.md"
+  #     - "**.png"
+  #     - ".vscode/**"
+  #     - ".devcontainer/**"
+  #     - ".github/dependabot.yml"
+  #     - "**.local.settings.json"
+
+env:
+  NODE_VERSION: 16.x
+  DISPLAY_NAME: Cloud Team Azure Function App Node.js Starter
+  FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
+  FUNCTION_APP_SLOT_NAME: production
+  FUNCTION_APP_PATH: ./
+
+jobs:
+  build-and-deploy:
+    # only continue if the closed PR was a merge or if invocated manually
+    if: github.event.workflow_dispatch || github.event.pull_request.merged
+    runs-on: windows-latest
+
+    steps:
+      # - name: 📤 Notify Teams
+      #   if: secrets.MS_TEAMS_WEBHOOK_URL
+      #   uses: mikesprague/teams-incoming-webhook-action@v1
+      #   with:
+      #     github-token: ${{ github.token }}
+      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+      #     deploy-card: true
+      #     title: ${{ env.DISPLAY_NAME }} Deployment Started
+      #     color: info
+
+      - name: 👷 Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🏗️ Setup Node.js ${{ env.NODE_VERSION }} environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: ⬆️ Update npm and install dependencies
+        shell: bash
+        run: npm i -g npm && npm install
+
+      - name: 🗑️ Remove Azure Core Function Tools (avoids deploy disk space issues)
+        shell: bash
+        run: rm -rf node_modules/azure-functions-core-tools
+
+      - name: 🛫 Deploy function app to Azure
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.FUNCTION_APP_NAME }}
+          slot-name: ${{ env.FUNCTION_APP_SLOT_NAME }}
+          package: ${{ env.FUNCTION_APP_PATH }}
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          respect-funcignore: true
+
+      # - name: ⚠️ Cancelled Notification
+      #   if: ${{ cancelled() && secrets.MS_TEAMS_WEBHOOK_URL }}
+      #   uses: mikesprague/teams-incoming-webhook-action@v1
+      #   with:
+      #     github-token: ${{ github.token }}
+      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+      #     deploy-card: true
+      #     title: ${{ env.DISPLAY_NAME }} Deployment Cancelled
+      #     color: warning
+
+      # - name: ⛔ Failure Notification
+      #   if: ${{ failure() && secrets.MS_TEAMS_WEBHOOK_URL }}
+      #   uses: mikesprague/teams-incoming-webhook-action@v1
+      #   with:
+      #     github-token: ${{ github.token }}
+      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+      #     deploy-card: true
+      #     title: ${{ env.DISPLAY_NAME }} Deployment Failed
+      #     color: failure
+
+      # - name: 🎉 Success Notification
+      #   if: ${{ success() && secrets.MS_TEAMS_WEBHOOK_URL }}
+      #   uses: mikesprague/teams-incoming-webhook-action@v1
+      #   with:
+      #     github-token: ${{ github.token }}
+      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL_DEV }}
+      #     deploy-card: true
+      #     title: ${{ env.DISPLAY_NAME }} Deployment Successful
+      #     color: success

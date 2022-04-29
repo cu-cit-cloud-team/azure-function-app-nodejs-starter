@@ -1,0 +1,108 @@
+{
+  "name": "ct-azure-function-app-nodejs-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Azure Function App starter template",
+  "scripts": {
+    "functions": "cross-env NODE_ENV=development func start",
+    "functions:verbose": "cross-env NODE_ENV=development func start --verbose",
+    "scratch": "cross-env NODE_ENV=development node --trace-warnings ./scratch.js",
+    "test": "echo \"No tests yet...\""
+  },
+  "author": {
+    "name": "Michael Sprague",
+    "email": "ms388@cornell.edu"
+  },
+  "repository": {
+    "url": "https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter"
+  },
+  "engines": {
+    "node": ">= 16.x",
+    "npm": ">= 7.x"
+  },
+  "dependencies": {
+    "axios": "0.27.2",
+    "dotenv": "16.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.17.9",
+    "@babel/eslint-parser": "7.17.0",
+    "@babel/eslint-plugin": "7.17.7",
+    "@babel/node": "7.16.8",
+    "@babel/plugin-transform-runtime": "7.17.0",
+    "@babel/preset-env": "7.16.11",
+    "@babel/runtime": "7.17.9",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
+    "@typescript-eslint/parser": "5.21.0",
+    "azure-functions-core-tools": "4.0.4483",
+    "babel-loader": "8.2.5",
+    "cross-env": "7.0.3",
+    "eslint": "8.14.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "prettier": "2.6.2",
+    "prettier-eslint": "14.0.2",
+    "typescript": "4.6.3",
+    "webpack": "5.72.0"
+  },
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "corejs": false,
+          "helpers": true,
+          "regenerator": true,
+          "useESModules": true
+        }
+      ]
+    ],
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "14"
+          }
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": false,
+      "commonjs": false,
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "ignorePatterns": [
+      "**/.history/*",
+      "**/node_modules/*"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "ecmaVersion": 11,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "impliedStrict": true,
+        "modules": true
+      }
+    },
+    "rules": {}
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "semi": true,
+    "tabWidth": 2
+  }
+}
