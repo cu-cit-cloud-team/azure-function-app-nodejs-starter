@@ -4,7 +4,7 @@ on:
   # allows manual runs of the workflow
   workflow_dispatch:
 
-  # uncomment lines 8-18 to run automatically on closed PRs (conditional on line 30 makes sure PR was closed via merge)
+  # uncomment lines 8-18 & 29 to run automatically on closed PRs (conditional on line 29 makes sure PR was closed via merge)
   # pull_request:
   #   types: [closed]
   #   branches:
@@ -26,7 +26,7 @@ env:
 
 jobs:
   build-and-deploy:
-    if: github.event.workflow_dispatch || github.event.pull_request.merged
+    # if: github.event.workflow_dispatch || github.event.pull_request.merged
     runs-on: windows-latest
     steps:
       - name: 📤 Notify Teams
