@@ -28,6 +28,8 @@
     "dotenv": "16.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/eslint-parser": "^7.17.0",
     "@typescript-eslint/eslint-plugin": "5.21.0",
     "@typescript-eslint/parser": "5.21.0",
     "azure-functions-core-tools": "4.0.4483",
@@ -58,7 +60,7 @@
       "**/node_modules/*"
     ],
     "parserOptions": {
-      "parser": "babel-eslint",
+      "parser": "@babel/eslint-parser",
       "ecmaVersion": 11,
       "sourceType": "module",
       "ecmaFeatures": {
