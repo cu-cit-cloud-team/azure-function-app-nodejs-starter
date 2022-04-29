@@ -32,7 +32,6 @@ jobs:
 
     steps:
       - name: 📤 Notify Teams
-        if: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -67,7 +66,7 @@ jobs:
           respect-funcignore: true
 
       - name: ⚠️ Cancelled Notification
-        if: ${{ cancelled() && secrets.MS_TEAMS_WEBHOOK_URL }}
+        if: ${{ cancelled() }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -77,7 +76,7 @@ jobs:
           color: warning
 
       - name: ⛔ Failure Notification
-        if: ${{ failure() && secrets.MS_TEAMS_WEBHOOK_URL }}
+        if: ${{ failure() }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -87,7 +86,7 @@ jobs:
           color: failure
 
       - name: 🎉 Success Notification
-        if: ${{ success() && secrets.MS_TEAMS_WEBHOOK_URL }}
+        if: ${{ success() }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
