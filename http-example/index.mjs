@@ -9,13 +9,14 @@ export default async (context, req) => {
       .get('https://icanhazdadjoke.com/', {
         headers: {
           Accept: 'application/json',
-          'User-Agent': 'Cloud Team Azure Function App - HTTP Endpoint',
+          'User-Agent': 'Cloud Team Azure Function App - HTTP Endpoint Demo',
         },
       })
       .then((response) => {
+        const { joke } = response.data;
         context.res = {
           status: 200,
-          body: JSON.stringify({ joke: `${response.data.joke}` }),
+          body: JSON.stringify({ joke }),
         };
       })
       .catch((error) => {
