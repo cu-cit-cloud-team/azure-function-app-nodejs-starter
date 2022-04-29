@@ -4,7 +4,7 @@ on:
   # allows manual runs of the workflow
   workflow_dispatch:
 
-  # uncomment lines 8-18 & 29 to run automatically on closed PRs (conditional on line 29 makes sure PR was closed via merge)
+  # uncomment lines 8-18 & 30 to run automatically on closed PRs (conditional on line 29 makes sure PR was closed via merge)
   # pull_request:
   #   types: [closed]
   #   branches:
@@ -30,8 +30,8 @@ jobs:
     # if: github.event.workflow_dispatch || github.event.pull_request.merged
     runs-on: windows-latest
     steps:
-      if: ${{ env.SEND_NOTIFICATIONS }}
       - name: 📤 Notify Teams
+        if: ${{ env.SEND_NOTIFICATIONS == true }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -66,7 +66,7 @@ jobs:
           respect-funcignore: true
 
       - name: ⚠️ Cancelled Notification
-        if: ${{ cancelled() && env.SEND_NOTIFICATIONS }}
+        if: ${{ cancelled() && env.SEND_NOTIFICATIONS == true }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -76,7 +76,7 @@ jobs:
           color: warning
 
       - name: ⛔ Failure Notification
-        if: ${{ failure() && env.SEND_NOTIFICATIONS }}
+        if: ${{ failure() && env.SEND_NOTIFICATIONS == true }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -86,7 +86,7 @@ jobs:
           color: failure
 
       - name: 🎉 Success Notification
-        if: ${{ success() && env.SEND_NOTIFICATIONS }}
+        if: ${{ success() && env.SEND_NOTIFICATIONS == true }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
