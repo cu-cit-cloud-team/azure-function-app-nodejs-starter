@@ -23,12 +23,14 @@ env:
   FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
   FUNCTION_APP_SLOT_NAME: production
   FUNCTION_APP_PATH: ./
+  SEND_NOTIFICATIONS: false # set to false to quiet/skip build notifications
 
 jobs:
   build-and-deploy:
     # if: github.event.workflow_dispatch || github.event.pull_request.merged
     runs-on: windows-latest
     steps:
+      if: ${{ env.SEND_NOTIFICATIONS }}
       - name: 📤 Notify Teams
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
@@ -64,7 +66,7 @@ jobs:
           respect-funcignore: true
 
       - name: ⚠️ Cancelled Notification
-        if: ${{ cancelled() }}
+        if: ${{ cancelled() && env.SEND_NOTIFICATIONS }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -74,7 +76,7 @@ jobs:
           color: warning
 
       - name: ⛔ Failure Notification
-        if: ${{ failure() }}
+        if: ${{ failure() && env.SEND_NOTIFICATIONS }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
@@ -84,7 +86,7 @@ jobs:
           color: failure
 
       - name: 🎉 Success Notification
-        if: ${{ success() }}
+        if: ${{ success() && env.SEND_NOTIFICATIONS }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
