@@ -16,6 +16,9 @@
   "repository": {
     "url": "https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter"
   },
+  "bugs": {
+    "url": "https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/issues"
+  },
   "engines": {
     "node": ">= 16.x",
     "npm": ">= 7.x"
