@@ -24,7 +24,28 @@ This template repo contains all the basics for starting a Node.js Azure Function
 
 ## What's Included
 
-... WIP ...
+- Minimal Node.js Azure Function app with two example Azure Functions that can be used as starting points (or removed)
+- ESlint and Prettier configs for development
+- GitHub Actions Workflow that can be configured and used to build and deploy the Function App
+- Dependabot.yml configured to check daily for dependency updates
+- Example `local.settings.json` (necessary to run locally)
+
+Note that this project uses ESM so each Azure Function has an `.mjs` extension (vs `.js`)
+
+### Example Azure Functions
+
+#### HTTP Trigger
+
+- name: `http-example`
+- about: example of proxying another API, returns JSON output
+- demo: <https://ct-azure-function-app-nodejs-starter.azurewebsites.net/api/http-example>
+  - source API: <https://icanhazdadjoke.com/api>
+
+#### Timer Trigger
+
+- name: `timer-example`
+- about: example using a cron (just console.logs every minute)
+- demo: n/a
 
 ## Getting Started
 
