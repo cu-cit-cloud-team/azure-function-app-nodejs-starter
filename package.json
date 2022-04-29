@@ -7,7 +7,6 @@
   "scripts": {
     "functions": "cross-env NODE_ENV=development func start",
     "functions:verbose": "cross-env NODE_ENV=development func start --verbose",
-    "scratch": "cross-env NODE_ENV=development node --trace-warnings ./scratch.js",
     "test": "echo \"No tests yet...\""
   },
   "author": {
