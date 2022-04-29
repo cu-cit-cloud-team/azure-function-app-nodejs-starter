@@ -31,15 +31,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # - name: 📤 Notify Teams
-      #   if: secrets.MS_TEAMS_WEBHOOK_URL
-      #   uses: mikesprague/teams-incoming-webhook-action@v1
-      #   with:
-      #     github-token: ${{ github.token }}
-      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-      #     deploy-card: true
-      #     title: ${{ env.DISPLAY_NAME }} Deployment Started
-      #     color: info
+      - name: 📤 Notify Teams
+        if: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        uses: mikesprague/teams-incoming-webhook-action@v1
+        with:
+          github-token: ${{ github.token }}
+          webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+          deploy-card: true
+          title: ${{ env.DISPLAY_NAME }} Deployment Started
+          color: info
 
       - name: 👷 Checkout repo
         uses: actions/checkout@v3
@@ -66,32 +66,32 @@ jobs:
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           respect-funcignore: true
 
-      # - name: ⚠️ Cancelled Notification
-      #   if: ${{ cancelled() && secrets.MS_TEAMS_WEBHOOK_URL }}
-      #   uses: mikesprague/teams-incoming-webhook-action@v1
-      #   with:
-      #     github-token: ${{ github.token }}
-      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-      #     deploy-card: true
-      #     title: ${{ env.DISPLAY_NAME }} Deployment Cancelled
-      #     color: warning
+      - name: ⚠️ Cancelled Notification
+        if: ${{ cancelled() && secrets.MS_TEAMS_WEBHOOK_URL }}
+        uses: mikesprague/teams-incoming-webhook-action@v1
+        with:
+          github-token: ${{ github.token }}
+          webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+          deploy-card: true
+          title: ${{ env.DISPLAY_NAME }} Deployment Cancelled
+          color: warning
 
-      # - name: ⛔ Failure Notification
-      #   if: ${{ failure() && secrets.MS_TEAMS_WEBHOOK_URL }}
-      #   uses: mikesprague/teams-incoming-webhook-action@v1
-      #   with:
-      #     github-token: ${{ github.token }}
-      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-      #     deploy-card: true
-      #     title: ${{ env.DISPLAY_NAME }} Deployment Failed
-      #     color: failure
+      - name: ⛔ Failure Notification
+        if: ${{ failure() && secrets.MS_TEAMS_WEBHOOK_URL }}
+        uses: mikesprague/teams-incoming-webhook-action@v1
+        with:
+          github-token: ${{ github.token }}
+          webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+          deploy-card: true
+          title: ${{ env.DISPLAY_NAME }} Deployment Failed
+          color: failure
 
-      # - name: 🎉 Success Notification
-      #   if: ${{ success() && secrets.MS_TEAMS_WEBHOOK_URL }}
-      #   uses: mikesprague/teams-incoming-webhook-action@v1
-      #   with:
-      #     github-token: ${{ github.token }}
-      #     webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL_DEV }}
-      #     deploy-card: true
-      #     title: ${{ env.DISPLAY_NAME }} Deployment Successful
-      #     color: success
+      - name: 🎉 Success Notification
+        if: ${{ success() && secrets.MS_TEAMS_WEBHOOK_URL }}
+        uses: mikesprague/teams-incoming-webhook-action@v1
+        with:
+          github-token: ${{ github.token }}
+          webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL_DEV }}
+          deploy-card: true
+          title: ${{ env.DISPLAY_NAME }} Deployment Successful
+          color: success
