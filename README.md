@@ -24,11 +24,12 @@ This template repo contains all the basics for starting a Node.js Azure Function
 
 ## What's Included
 
-- Minimal Node.js Azure Function app with two example Azure Functions that can be used as starting points (or removed)
+- Minimal Node.js Azure Function App with two example Azure Functions that can be used as starting points (or removed)
 - ESlint and Prettier configs for development
 - GitHub Actions Workflow that can be configured and used to build and deploy the Function App
 - Dependabot.yml configured to check daily for dependency updates
 - Example `local.settings.json` (necessary to run locally)
+- Some VSCode related files for folks who use it (`./.vscode/`, `./jsconfig.json`)
 
 Note that this project uses ESM so each Azure Function has an `.mjs` extension (vs `.js`)
 
