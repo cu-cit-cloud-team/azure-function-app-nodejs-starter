@@ -17,8 +17,7 @@ This template repo contains all the basics for starting a Node.js Azure Function
 
 #### Assumptions
 
-- You are familiar with [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview)
-  - including how to [create them](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-javascript)
+- You are familiar with [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) (including how to [create them](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-javascript))
 
 #### Good to know (but not necessary to use this template)
 
@@ -28,10 +27,10 @@ This template repo contains all the basics for starting a Node.js Azure Function
 ## What's Included
 
 - Minimal Node.js Azure Function App with two example Azure Functions that can be used as starting points (or removed)
-- ESlint and Prettier configs for development
 - GitHub Actions Workflow that can be configured and used to build and deploy the Function App
 - Dependabot.yml configured to check daily for dependency updates
 - Example `local.settings.json` (necessary to configure/run locally)
+- ESlint and Prettier configs for development
 - Some VSCode related files for folks who use it (`./.vscode/`, `./jsconfig.json`)
 
 Note that this project uses ESM so each Azure Function has an `.mjs` extension (vs `.js`)
@@ -53,10 +52,11 @@ Note that this project uses ESM so each Azure Function has an `.mjs` extension (
 
 ## Getting Started
 
+1. In GitHub, [click here](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/generate) (or at the top of the repo click the `Use this template` button) to create a new repository under your namespace
+    - **note:** you'll be required to give it a name, all other fields can be left alone)
+
 ### Local Development
 
-1. From GitHub, click the `Use this template` button to create a new repository under your namespace
-    - **note:** you'll be required to give it a name, all other fields can be left alone)
 1. Clone the new repo to your machine `git clone https://github.com/your-username/your-repo-name.git`
 1. Enter directory `cd your-repo-name`
 1. Install dependencies `npm install`
@@ -66,6 +66,15 @@ Note that this project uses ESM so each Azure Function has an `.mjs` extension (
     - **note:** once you have a Function App setup in Azure, you will want to fill in these values and add any additional you need
 1. Run function app locally `npm run functions` or `npm run functions:verbose`
 
-### Configure GH Action Workflow for Deployments
+### Azure Deployment
 
-... WIP...
+#### General
+
+Deployments can be configured however one typically deploys their Function Apps.
+
+For convenience, this template includes a GitHub Action Workflow that (with minimal
+configuration) can be setup and used to deploy your Function App to Azure.
+
+#### Configuring Included Workflow for Deployments
+
+...WIP...
