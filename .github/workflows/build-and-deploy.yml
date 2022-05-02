@@ -19,7 +19,7 @@ on:
 
 env:
   NODE_VERSION: 16.x
-  DISPLAY_NAME: Cloud Team Azure Function App Node.js Starter
+  DISPLAY_NAME: Azure Function App Node.js Starter
   FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
   FUNCTION_APP_SLOT_NAME: production
   FUNCTION_APP_PATH: ./

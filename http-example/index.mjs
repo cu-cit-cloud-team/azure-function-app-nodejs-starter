@@ -9,7 +9,7 @@ export default async (context, req) => {
       .get('https://icanhazdadjoke.com/', {
         headers: {
           Accept: 'application/json',
-          'User-Agent': 'Cloud Team Azure Function App - HTTP Endpoint Demo',
+          'User-Agent': 'Azure Function App - HTTP Endpoint Demo',
         },
       })
       .then((response) => {
