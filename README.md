@@ -4,8 +4,6 @@
 
 Template repo for starting an Azure Function App with Node.js
 
-:construction: Work and documentation in progress :construction:
-
 ## About
 
 This template repo contains all the basics for starting a Node.js Azure Function App project
@@ -77,4 +75,13 @@ configuration) can be setup and used to deploy your Function App to Azure.
 
 #### Configuring Included Workflow for Deployments
 
-...WIP...
+1. Before continuing, you will need:
+    - [ ] The name of the function app you have already created and will be deploying to
+    - [ ] The publish profile for the function app you will be deploying to
+1. Go to your repo settings for [Actions secrets](/settings/secrets/actions)
+1. Click the `New repository secret` button
+    - Name: `AZURE_FUNCTIONAPP_PUBLISH_PROFILE`
+    - Value: use the contents of the function app's publish profile
+1. Edit `./.github/workflows/build-and-deploy.yml`
+    - change the value of `FUNCTION_APP_NAME` on line 21 to match your function app's name
+    - if desired, uncomment the lines that enable automatic deploys on PR merge (see workflow comments)
