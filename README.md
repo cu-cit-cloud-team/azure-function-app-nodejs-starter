@@ -78,7 +78,7 @@ configuration) can be setup and used to deploy your Function App to Azure.
 1. Before continuing, you will need:
     - [ ] The name of the function app you have already created and will be deploying to
     - [ ] The publish profile for the function app you will be deploying to
-1. Go to your repo settings for [Actions secrets](/settings/secrets/actions)
+1. Go to repo settings for [Actions secrets](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/settings/secrets/actions)
 1. Click the `New repository secret` button
     - Name: `AZURE_FUNCTIONAPP_PUBLISH_PROFILE`
     - Value: use the contents of the function app's publish profile
