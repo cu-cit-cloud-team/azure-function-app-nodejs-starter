@@ -17,7 +17,7 @@ on:
   #     - ".github/dependabot.yml"
 
 env:
-  NODE_VERSION: 16.x
+  NODE_VERSION: 18.x
   FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
   FUNCTION_APP_SLOT_NAME: production
   FUNCTION_APP_PATH: ./
