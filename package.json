@@ -24,7 +24,7 @@
     "npm": ">= 8.x"
   },
   "dependencies": {
-    "axios": "1.1.3",
+    "axios": "1.2.0",
     "dotenv": "16.0.3"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-prettier": "4.2.1",
-    "prettier": "2.7.1",
+    "prettier": "2.8.0",
     "prettier-eslint": "15.0.1"
   },
   "eslintConfig": {
