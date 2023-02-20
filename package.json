@@ -28,7 +28,7 @@
     "dotenv": "16.0.3"
   },
   "devDependencies": {
-    "@babel/core": "7.20.12",
+    "@babel/core": "7.21.0",
     "@babel/eslint-parser": "7.19.1",
     "azure-functions-core-tools": "4.0.4915",
     "cross-env": "7.0.3",
