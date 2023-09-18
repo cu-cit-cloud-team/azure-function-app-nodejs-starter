@@ -9,6 +9,7 @@
 .nvmrc
 tsconfig.json
 jsconfig.json
+biome.json
 local.settings.json
 example.local.settings.json
 scratch.js

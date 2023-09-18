@@ -28,7 +28,7 @@ This template repo contains all the basics for starting a Node.js Azure Function
 - GitHub Actions Workflow that can be configured and used to build and deploy the Function App
 - Dependabot.yml configured to check daily for dependency updates
 - Example `local.settings.json` (necessary to configure/run locally)
-- ESlint and Prettier configs for development
+- Biome config for development
 - Some VSCode related files for folks who use it (`./.vscode/`, `./jsconfig.json`)
 
 Note that this project uses ESM so each Azure Function has an `.mjs` extension (vs `.js`)
