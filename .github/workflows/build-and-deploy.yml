@@ -17,7 +17,7 @@ on:
   #     - ".github/dependabot.yml"
 
 env:
-  NODE_VERSION: 18.x
+  NODE_VERSION: 18
   FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
   FUNCTION_APP_SLOT_NAME: production
   FUNCTION_APP_PATH: ./
@@ -34,6 +34,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
+
+      - name: ⚡  Cache node_modules
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: ${{ env.FUNCTION_APP_PATH }}/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
 
       - name: ⬆️ Update npm and install dependencies
         shell: bash
