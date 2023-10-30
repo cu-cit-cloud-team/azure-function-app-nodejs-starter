@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "src/**.js",
   "description": "Azure Function App starter template",
   "scripts": {
     "functions": "cross-env NODE_ENV=development func start",
