@@ -10,7 +10,7 @@ This template repo contains all the basics for starting a Node.js Azure Function
 
 ### Requirements
 
-- Node.js v16.x (with npm >= v7.x)
+- Node.js v20.x (with npm >= v9.x)
 - Azure Subscription
 
 #### Assumptions
@@ -30,8 +30,6 @@ This template repo contains all the basics for starting a Node.js Azure Function
 - Example `local.settings.json` (necessary to configure/run locally)
 - Biome config for development
 - Some VSCode related files for folks who use it (`./.vscode/`, `./jsconfig.json`)
-
-Note that this project uses ESM so each Azure Function has an `.mjs` extension (vs `.js`)
 
 ### Example Azure Functions
 
