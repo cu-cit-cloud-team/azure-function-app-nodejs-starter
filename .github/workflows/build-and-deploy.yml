@@ -16,6 +16,13 @@ on:
   #     - ".devcontainer/**"
   #     - ".github/dependabot.yml"
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   NODE_VERSION: 20
   FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
@@ -26,6 +33,7 @@ jobs:
   build-and-deploy:
     # if: github.event.workflow_dispatch || github.event.pull_request.merged
     runs-on: windows-latest
+    environment: production
     steps:
       - name: 👷 Checkout repo
         uses: actions/checkout@v4
@@ -44,7 +52,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
-
 
       - name: ⬆️ Update npm and install dependencies
         shell: bash
