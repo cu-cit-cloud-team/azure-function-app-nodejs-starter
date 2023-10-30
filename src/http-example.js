@@ -7,7 +7,7 @@ app.http('http-example', {
   methods: ['GET'],
   handler: async (request, context) => {
     try {
-      await axios
+      const joke = await axios
         .get('https://icanhazdadjoke.com/', {
           headers: {
             Accept: 'application/json',
@@ -16,17 +16,18 @@ app.http('http-example', {
         })
         .then((response) => {
           const { joke } = response.data;
-          console.log(joke);
-          return {
-            headers: { 'content-type': 'application/json' },
-            status: 200,
-            body: JSON.stringify({ joke }),
-          };
+          return joke;
         })
         .catch((error) => {
           // bubble error up to try/catch so it throws 500
           throw error;
         });
+      return {
+        status: 200,
+        body: JSON.stringify({
+          joke,
+        }),
+      };
     } catch (error) {
       handleError(error, context);
       return {
