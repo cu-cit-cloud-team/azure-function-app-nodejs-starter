@@ -28,7 +28,7 @@
   "dependencies": {
     "@azure/functions": "4.2.0",
     "axios": "1.6.7",
-    "dotenv": "16.4.2"
+    "dotenv": "16.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
