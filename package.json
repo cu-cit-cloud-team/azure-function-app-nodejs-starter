@@ -33,7 +33,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
     "azure-functions-core-tools": "4.0.5611",
-    "conventional-changelog": "5.1.0",
+    "conventional-changelog": "6.0.0",
     "conventional-changelog-cli": "4.1.0",
     "conventional-changelog-conventionalcommits": "8.0.0",
     "cross-env": "7.0.3",
