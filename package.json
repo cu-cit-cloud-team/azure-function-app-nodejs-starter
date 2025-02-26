@@ -1,5 +1,5 @@
 {
-  "name": "ct-azure-function-app-nodejs-starter",
+  "name": "azure-function-app-nodejs-starter",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -16,10 +16,10 @@
     "email": "ms388@cornell.edu"
   },
   "repository": {
-    "url": "https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter"
+    "url": "https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter"
   },
   "bugs": {
-    "url": "https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/issues"
+    "url": "https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/issues"
   },
   "engines": {
     "node": ">= 22.x",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@azure/functions": "4.6.1",
-    "axios": "1.7.9",
     "dotenv": "16.4.7"
   },
   "devDependencies": {
