@@ -2,15 +2,15 @@
 
 [![Build & Deploy](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/actions/workflows/build-and-deploy.yml)
 
-Template repo for starting an Azure Function App with Node.js
+Template repo for starting an Azure Function App with Node.js/TypeScript
 
 ## About
 
-This template repo contains all the basics for starting a Node.js Azure Function App project
+This template repo contains all the basics for starting a TypeScript Azure Function App project
 
 ### Requirements
 
-- Node.js v20.x (with npm >= v9.x)
+- Node.js v22.x (with npm >= v10.x)
 - Azure Subscription
 
 #### Assumptions
@@ -24,12 +24,12 @@ This template repo contains all the basics for starting a Node.js Azure Function
 
 ## What's Included
 
-- Minimal Node.js Azure Function App with two example Azure Functions that can be used as starting points (or removed)
+- Minimal Node.js/TypeScript Azure Function App with two example Azure Functions that can be used as starting points (or removed)
 - GitHub Actions Workflow that can be configured and used to build and deploy the Function App
 - Dependabot.yml configured to check daily for dependency updates
 - Example `local.settings.json` (necessary to configure/run locally)
 - Biome config for development
-- Some VSCode related files for folks who use it (`./.vscode/`, `./jsconfig.json`)
+- Some VSCode related files for folks who use it (`./.vscode/`)
 
 ### Example Azure Functions
 

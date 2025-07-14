@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "strictFunctionTypes": true,
+    "rootDir": ".",
+    "outDir": "dist",
+    "types": ["node"],
+    "lib": ["es2022"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "composite": true,
+    "emitDecoratorMetadata": true,
+    "declarationDir": "types"
+  },
+  "include": ["./src/**/*.ts", "./lib/**/*.ts"],
+  "exclude": [
+    "./src/**/*.d.ts",
+    "./src/**/scratch*.ts",
+    "node_modules",
+    ".history",
+    ".git",
+    ".github",
+    "<node_internals>/**"
+  ]
+}

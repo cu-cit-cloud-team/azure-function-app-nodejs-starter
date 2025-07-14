@@ -153,5 +153,7 @@ project.lock.json
 appsettings.json
 local.settings.json
 
+types
+
 # VS Code stuff
 .history

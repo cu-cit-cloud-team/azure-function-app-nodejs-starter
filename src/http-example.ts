@@ -1,10 +1,16 @@
-import { app } from '@azure/functions';
+import { app, type InvocationContext } from '@azure/functions';
 
 import { handleError } from '../lib/helpers.js';
 
+interface JokeResponse {
+  id: string;
+  joke: string;
+  status: number;
+}
+
 app.http('http-example', {
   methods: ['GET'],
-  handler: async (request, context) => {
+  handler: async (request, context: InvocationContext) => {
     try {
       const joke = await fetch('https://icanhazdadjoke.com/', {
         headers: {
@@ -13,7 +19,7 @@ app.http('http-example', {
         },
       })
         .then(async (response) => {
-          const { joke } = await response.json();
+          const { joke } = (await response.json()) as JokeResponse;
           return joke;
         })
         .catch((error) => {

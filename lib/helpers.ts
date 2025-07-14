@@ -1,3 +1,5 @@
+import type { InvocationContext } from '@azure/functions';
+
 /**
  * isProd
  * @summary returns true if NODE_ENV is set to 'production'
@@ -13,5 +15,7 @@ export const isProd = () => process.env.NODE_ENV === 'production';
  * @param {?context} [context=null] Azure Function context
  * @returns {void}
  */
-export const handleError = (error, context = null) =>
-  context ? context.log.error(error) : console.error(error);
+export const handleError = (
+  error: unknown,
+  context: InvocationContext | null = null
+) => (context ? context.error(error) : console.error(error));

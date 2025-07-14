@@ -3,12 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "src/**.js",
+  "main": "dist/src/**.js",
   "description": "Azure Function App starter template",
   "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "clean": "rimraf dist",
+    "declarations": "rimraf types/ && tsc --emitDeclarationOnly",
     "functions": "cross-env NODE_ENV=development func start",
     "functions:verbose": "cross-env NODE_ENV=development func start --verbose",
+    "lint": "biome check",
+    "prefunctions": "npm run clean && npm run build",
+    "prefunctions:verbose": "npm run clean && npm run build",
     "test": "echo \"No tests yet...\"",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
     "version": "npm run changelog"
   },
   "author": {
@@ -31,12 +41,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.1",
+    "@types/node": "24.0.13",
     "azure-functions-core-tools": "4.0.7512",
     "conventional-changelog": "7.1.1",
     "conventional-changelog-cli": "5.0.0",
     "conventional-changelog-conventionalcommits": "9.1.0",
     "cross-env": "7.0.3",
-    "cz-git": "1.12.0"
+    "cz-git": "1.12.0",
+    "rimraf": "6.0.1",
+    "typescript": "5.8.3"
   },
   "config": {
     "commitizen": {
@@ -45,5 +58,9 @@
   },
   "release": {
     "preset": "conventionalcommits"
+  },
+  "volta": {
+    "node": "22.17.0",
+    "npm": "11.4.2"
   }
 }
