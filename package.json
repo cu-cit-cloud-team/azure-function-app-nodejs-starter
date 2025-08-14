@@ -40,7 +40,7 @@
     "dotenv": "17.2.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.4",
+    "@biomejs/biome": "2.2.0",
     "@types/node": "24.2.1",
     "azure-functions-core-tools": "4.1.1",
     "conventional-changelog": "7.1.1",
