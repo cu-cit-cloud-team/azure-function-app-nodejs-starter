@@ -36,7 +36,7 @@
     "npm": ">= 10.x"
   },
   "dependencies": {
-    "@azure/functions": "4.7.3",
+    "@azure/functions": "4.8.0",
     "dotenv": "17.2.2"
   },
   "devDependencies": {
