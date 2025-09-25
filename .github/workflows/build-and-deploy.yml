@@ -26,7 +26,6 @@ concurrency:
 env:
   NODE_VERSION: 22
   FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
-  FUNCTION_APP_SLOT_NAME: production
   FUNCTION_APP_PATH: ./
 
 jobs:
@@ -65,6 +64,5 @@ jobs:
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ env.FUNCTION_APP_NAME }}
-          slot-name: ${{ env.FUNCTION_APP_SLOT_NAME }}
           package: ${{ env.FUNCTION_APP_PATH }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
