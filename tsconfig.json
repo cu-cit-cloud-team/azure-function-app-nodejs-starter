@@ -9,7 +9,7 @@
     "strictFunctionTypes": true,
     "rootDir": ".",
     "outDir": "dist",
-    "types": ["node"],
+    "types": ["node", "vitest"],
     "lib": ["es2022"],
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -19,10 +19,12 @@
     "emitDecoratorMetadata": true,
     "declarationDir": "types"
   },
-  "include": ["./src/**/*.ts", "./lib/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": [
     "./src/**/*.d.ts",
+    "./src/**/*.test.ts",
     "./src/**/scratch*.ts",
+    "dist/**",
     "node_modules",
     ".history",
     ".git",
