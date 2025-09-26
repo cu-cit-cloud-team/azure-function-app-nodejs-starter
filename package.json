@@ -21,7 +21,7 @@
     "prefunctions": "npm run clean && npm run build",
     "prefunctions:verbose": "npm run clean && npm run build",
     "scratch": "cross-env NODE_ENV=development LOCAL_DEV=true npx tsx --env-file=.env --trace-warnings src/scratch.ts",
-    "test": "npm run lint && npm run vitest:coverage",
+    "test": "npm run lint && npm run vitest:coverage -- --silent",
     "typecheck": "npx tsc --noEmit",
     "typecheck:watch": "npx tsc --noEmit --watch",
     "typedoc": "npx typedoc --out docs --entryPointStrategy expand ./src --excludeInternal false --excludeNotDocumented false --plugin typedoc-plugin-markdown --readme none",
