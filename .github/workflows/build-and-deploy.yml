@@ -4,18 +4,6 @@ on:
   # allows manual runs of the workflow
   workflow_dispatch:
 
-  # uncomment lines 8-17 & 27 to run automatically on closed PRs (conditional on line 27 makes sure PR was closed via merge)
-  # pull_request:
-  #   types: [closed]
-  #   branches:
-  #     - main
-  #   paths-ignore:
-  #     - "**.md"
-  #     - "**.local.settings.json"
-  #     - ".vscode/**"
-  #     - ".devcontainer/**"
-  #     - ".github/dependabot.yml"
-
 permissions:
   contents: read
 
@@ -24,14 +12,15 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  FUNCTION_APP_NAME: ct-az-function-app-nodejs-starter
+  FUNCTION_APP_PATH: .
+  FUNCTION_APP_SKU: flexconsumption
+  FUNCTION_APP_SLOT_NAME: Production
   NODE_VERSION: 22
-  FUNCTION_APP_NAME: ct-azure-function-app-nodejs-starter
-  FUNCTION_APP_PATH: ./
 
 jobs:
   build-and-deploy:
-    # if: github.event.workflow_dispatch || github.event.pull_request.merged
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: production
     steps:
       - name: 👷 Checkout repo
@@ -52,10 +41,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
 
-      - name: ⬆️ Update npm, install dependencies
+      - name: ⬆️ Update npm, install global and project dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
-        run: npm i -g npm && npm install
+        run: npm i -g npm rimraf typescript && npm install
+
+      - name: ✅ Run unit tests and linter
+        run: npm test
 
       - name: ⚙️ Build function app
         run: npm run build
@@ -66,3 +58,5 @@ jobs:
           app-name: ${{ env.FUNCTION_APP_NAME }}
           package: ${{ env.FUNCTION_APP_PATH }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          sku: ${{ env.FUNCTION_APP_SKU }}
+          slot-name: ${{ env.FUNCTION_APP_SLOT_NAME }}
