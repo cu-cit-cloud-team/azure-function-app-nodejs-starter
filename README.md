@@ -43,7 +43,7 @@ This template repo contains all the basics for starting a TypeScript Azure Funct
 #### Timer Trigger
 
 - **Name:** `timer-example`
-- **Description:** cron/scheduled example (console.logs some output every minute)
+- **Description:** cron/scheduled example (console.logs some output every 6 hours)
 - **Demo:** n/a (run locally or deploy to see output)
 
 ## Getting Started
