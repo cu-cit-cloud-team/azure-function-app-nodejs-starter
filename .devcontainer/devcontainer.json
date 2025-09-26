@@ -1,0 +1,48 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+  "name": "azure-function-app-nodejs-starter",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [7071, 10000, 10001, 10002],
+  "otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "installDirectlyFromGitHubRelease": true,
+      "version": "latest"
+    }
+  },
+
+  "containerEnv": {
+    "NODE_ENV": "development",
+    "TZ": "America/New_York"
+  },
+
+  "mounts": [
+    // Workaround to ignore local node_modules folder as there's no official way to do this with devcontainers
+    // NOTE: must set "remoteUser" to "root" or change ownership to the "node" user after devcontainer is created
+    "type=volume,target=/workspaces/${localWorkspaceFolderBasename}/node_modules/",
+    // save bash history in a volume so it persists across devcontainer restarts
+    "source=azure-function-app-nodejs-starter-bash-history,target=/command-history,type=volume"
+  ],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "sudo chown -R $(whoami) node_modules && sudo chown -R $(whoami) /command-history",
+
+  "postStartCommand": ["npm", "install"]
+
+  // Configure tool-specific properties.
+  // "customizations": {},
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}
