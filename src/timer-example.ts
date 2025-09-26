@@ -21,7 +21,9 @@ export const timerExampleHandler: TimerExampleHandler = async (
     if (timerBinding?.isPastDue) {
       context.log('[timer-example] Timer trigger is running behind');
     }
-    context.log(`[timer-example] Azure Function ran at ${timeStamp}`);
+    context.log(
+      `[timer-example] Azure Function "Timer Trigger" ran at ${timeStamp}`
+    );
   } catch (error) {
     handleError(error, context);
     return {
@@ -36,8 +38,8 @@ export const timerExampleHandler: TimerExampleHandler = async (
 
 // Register the handler preserving original configuration
 app.timer('timer-example', {
-  runOnStartup: true,
-  useMonitor: false,
-  schedule: '0 */1 * * * *',
   handler: timerExampleHandler,
+  useMonitor: false,
+  runOnStartup: true,
+  schedule: '0 0 */6 * * *',
 });
