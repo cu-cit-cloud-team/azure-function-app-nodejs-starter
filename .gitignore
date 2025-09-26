@@ -157,3 +157,13 @@ types
 
 # VS Code stuff
 .history
+
+# Azurite extension stuff
+AzuriteConfig
+__azurite_*.*
+__blobstorage__
+__queuestorage__
+.azurite
+
+# Misc
+scratch*.ts

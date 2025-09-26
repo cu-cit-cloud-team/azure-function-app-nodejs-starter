@@ -1,8 +1,10 @@
+.azurite/
+.devcontainer/
 .git/
 .github/
 .history/
 .vscode/
-lib/
+coverage/
 src/
 types/
 *.js.map
@@ -10,11 +12,14 @@ types/
 *.md
 *.code-workspace
 .editorConfig
+.env
+.env.example
 .gitignore
 .nvmrc
 biome.json
 example.local.settings.json
 local.settings.json
 tsconfig.json
+vitest.config.json
 CODEOWNERS
 README.md

@@ -3,11 +3,17 @@
   "files": {
     "includes": [
       "**",
+      "!**/.devcontainer/**/*",
       "!**/.git/**/*",
       "!**/.github/**/*",
       "!**/.history/**/*",
       "!**/.vscode/**/*",
-      "!**/node_modules/**/*"
+      "!**/coverage/**/*",
+      "!**/dist/**/*",
+      "!**/node_modules/**/*",
+      "!**/types/**/*",
+      "!**/*.d.ts",
+      "!**/*.test.ts"
     ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
@@ -28,7 +34,12 @@
         "noInferrableTypes": "error",
         "noUselessElse": "error"
       },
-      "correctness": {}
+      "correctness": {
+        "noNodejsModules": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn"
+      }
     }
   },
   "formatter": {
@@ -45,9 +56,7 @@
       "bracketSpacing": true,
       "indentWidth": 2,
       "indentStyle": "space",
-      "lineWidth": 80,
       "arrowParentheses": "always",
-      "jsxQuoteStyle": "double",
       "quoteStyle": "single",
       "semicolons": "always",
       "trailingCommas": "es5"
