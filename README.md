@@ -1,6 +1,6 @@
 # ct-azure-function-app-nodejs-starter
 
-[![Build & Deploy](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/actions/workflows/build-and-deploy.yml)
+[![Build & Deploy](https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/actions/workflows/build-and-deploy.yml)
 
 Template repo for starting an Azure Function App with Node.js/TypeScript
 
@@ -37,7 +37,7 @@ This template repo contains all the basics for starting a TypeScript Azure Funct
 
 - **Name:** `http-example`
 - **Description:** example of proxying another API, returns JSON output
-- **Demo:** <https://ct-azure-function-app-nodejs-starter.azurewebsites.net/api/http-example>
+- **Demo:** <https://ct-az-function-app-nodejs-starter.azurewebsites.net/api/http-example>
   - source API attribution: <https://icanhazdadjoke.com/api>
 
 #### Timer Trigger
@@ -48,7 +48,7 @@ This template repo contains all the basics for starting a TypeScript Azure Funct
 
 ## Getting Started
 
-1. In GitHub, [click here](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/generate) (or at the top of the repo click the `Use this template` button) to create a new repository under your namespace
+1. In GitHub, [use this link](https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/generate) (or at the top of the repo click the `Use this template` button) to create a new repository under your namespace
     - **note:** you'll be required to give it a name, all other fields can be left alone)
 
 ### Local Development
@@ -76,7 +76,7 @@ configuration) can be setup and used to deploy your Function App to Azure.
 1. Before continuing, you will need:
     - [ ] The name of the function app you have already created and will be deploying to
     - [ ] The publish profile for the function app you will be deploying to
-1. Go to repo settings for [Actions secrets](https://github.com/CU-CommunityApps/ct-azure-function-app-nodejs-starter/settings/secrets/actions)
+1. Go to repo settings for [Actions secrets](https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/settings/secrets/actions)
 1. Click the `New repository secret` button
     - Name: `AZURE_FUNCTIONAPP_PUBLISH_PROFILE`
     - Value: use the contents of the function app's publish profile
