@@ -3,23 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "dist/src/**.js",
+  "main": "dist/src/**/*.js",
   "description": "Azure Function App starter template",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "changelog": "conventional-changelog -i CHANGELOG.md -s && git add CHANGELOG.md",
-    "clean": "rimraf dist",
-    "declarations": "rimraf types/ && tsc --emitDeclarationOnly",
+    "azurite": "docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite",
+    "biome": "npx biome lint ./src/**/*.ts",
+    "build": "npx tsc",
+    "build:watch": "npx tsc --watch",
+    "changelog": "npx conventional-changelog -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "clean": "npx rimraf dist",
+    "declarations": "npx rimraf types/ && npx tsc --emitDeclarationOnly",
     "functions": "cross-env NODE_ENV=development func start",
     "functions:verbose": "cross-env NODE_ENV=development func start --verbose",
-    "lint": "biome check",
+    "lint": "npm run biome && npm run typecheck",
+    "prebuild": "npm run clean",
+    "prebuild:watch": "npm run clean",
     "prefunctions": "npm run clean && npm run build",
     "prefunctions:verbose": "npm run clean && npm run build",
-    "test": "echo \"No tests yet...\"",
-    "typecheck": "tsc --noEmit",
-    "typecheck:watch": "tsc --noEmit --watch",
-    "version": "npm run changelog"
+    "scratch": "cross-env NODE_ENV=development LOCAL_DEV=true npx tsx --env-file=.env --trace-warnings src/scratch.ts",
+    "test": "npm run lint && npm run vitest:coverage",
+    "typecheck": "npx tsc --noEmit",
+    "typecheck:watch": "npx tsc --noEmit --watch",
+    "typedoc": "npx typedoc --out docs --entryPointStrategy expand ./src --excludeInternal false --excludeNotDocumented false --plugin typedoc-plugin-markdown --readme none",
+    "typedoc-html": "npx typedoc --out docs/docs --entryPointStrategy expand ./src --excludeInternal false --excludeNotDocumented false --readme none",
+    "version": "npm run changelog",
+    "vitest": "npx vitest run",
+    "vitest:watch": "npx vitest run --watch",
+    "vitest:coverage": "npx vitest run --coverage"
   },
   "author": {
     "name": "Michael Sprague",
@@ -42,6 +52,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
     "@types/node": "24.5.2",
+    "@vitest/coverage-v8": "3.2.4",
     "azure-functions-core-tools": "4.2.2",
     "conventional-changelog": "7.1.1",
     "conventional-changelog-cli": "5.0.0",
@@ -52,7 +63,8 @@
     "tsx": "4.20.6",
     "typedoc": "0.28.13",
     "typedoc-plugin-markdown": "4.9.0",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
   },
   "config": {
     "commitizen": {
