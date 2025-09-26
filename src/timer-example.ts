@@ -41,5 +41,6 @@ app.timer('timer-example', {
   handler: timerExampleHandler,
   useMonitor: false,
   runOnStartup: true,
-  schedule: '0 0 */6 * * *',
+  // schedule: '0 */1 * * * *', // every minute
+  schedule: '0 0 */6 * * *', // every 6 hours
 });
