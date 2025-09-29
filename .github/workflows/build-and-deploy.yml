@@ -4,24 +4,28 @@ on:
   # allows manual runs of the workflow
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
+  COVERAGE_REPORT_ARTIFACT: coverage-report-artifact
   FUNCTION_APP_NAME: ct-az-function-app-nodejs-starter
   FUNCTION_APP_PATH: .
   FUNCTION_APP_SKU: flexconsumption
   FUNCTION_APP_SLOT_NAME: Production
   NODE_VERSION: 22
+  PAGES_ARTIFACT_NAME: gh-pages-artifact
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
     environment: production
+
     steps:
       - name: 👷 Checkout repo
         uses: actions/checkout@v5
@@ -49,6 +53,13 @@ jobs:
       - name: ✅ Run unit tests and linter
         run: npm test
 
+      - name: 📦 Create and upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.COVERAGE_REPORT_ARTIFACT }}
+          path: "./coverage"
+          retention-days: 1
+
       - name: ⚙️ Build function app
         run: npm run build
 
@@ -60,3 +71,40 @@ jobs:
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           sku: ${{ env.FUNCTION_APP_SKU }}
           slot-name: ${{ env.FUNCTION_APP_SLOT_NAME }}
+
+  publish-coverage-report:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 📦 Download build artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: ${{ env.COVERAGE_REPORT_ARTIFACT }}
+
+      - name: 🏗️ Setup GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📦 Create and upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+          name: ${{ env.PAGES_ARTIFACT_NAME }}
+          retention-days: 1
+
+      - name: 🚀 Deploy GitHub Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}
