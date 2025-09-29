@@ -4,22 +4,21 @@ import { httpExampleHandler } from './http-example.js';
 import * as utils from './lib/utils.js';
 
 describe('httpExampleHandler (direct import)', () => {
-  const originalFetch = globalThis.fetch;
-
   beforeEach(() => {
     vi.resetAllMocks();
   });
 
   afterEach(() => {
-    globalThis.fetch = originalFetch;
+    vi.unstubAllGlobals();
   });
 
   it('returns 200 and body with joke when fetch succeeds', async () => {
     const fakeJoke = 'a test dad joke';
 
-    globalThis.fetch = vi.fn(async () => ({
+    const mockFetch = vi.fn().mockResolvedValue({
       json: async () => ({ id: '1', joke: fakeJoke, status: 200 }),
-    })) as unknown as typeof fetch;
+    });
+    vi.stubGlobal('fetch', mockFetch);
 
     const fakeContext = { invocationId: '1', error: vi.fn() };
 
@@ -30,9 +29,8 @@ describe('httpExampleHandler (direct import)', () => {
 
   it('calls handleError and returns 500 when fetch throws', async () => {
     const err = new Error('boom');
-    globalThis.fetch = vi.fn(async () => {
-      throw err;
-    }) as unknown as typeof fetch;
+    const mockFetch = vi.fn().mockRejectedValue(err);
+    vi.stubGlobal('fetch', mockFetch);
 
     const handleSpy = vi.spyOn(utils, 'handleError').mockImplementation(() => {});
 
@@ -41,10 +39,10 @@ describe('httpExampleHandler (direct import)', () => {
     const result = await httpExampleHandler(null, fakeContext as any);
 
     expect(handleSpy).toHaveBeenCalledWith(err, fakeContext);
+    expect(result.status).toBe(500);
 
     const parsed = JSON.parse(result.body);
-    expect(result.status).toBe(500);
     expect(parsed.status).toBe(500);
-    expect(Object.prototype.hasOwnProperty.call(parsed, 'error')).toBe(true);
+    expect(parsed).toHaveProperty('error');
   });
 });

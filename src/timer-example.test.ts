@@ -14,7 +14,8 @@ describe('timerExampleHandler', () => {
 
     const result = await timerExampleHandler(binding, fakeContext);
 
-    expect(fakeContext.log).toHaveBeenCalled();
+    expect(fakeContext.log).toHaveBeenCalledOnce();
+    expect(fakeContext.log).toHaveBeenCalledWith(expect.stringContaining('[timer-example] Azure Function "Timer Trigger" ran at'));
     expect(result).toBeUndefined();
   });
 
@@ -24,8 +25,9 @@ describe('timerExampleHandler', () => {
 
     const result = await timerExampleHandler(binding, fakeContext);
 
-    // should have logged both the past-due and the run message
-    expect(fakeContext.log).toHaveBeenCalled();
+    expect(fakeContext.log).toHaveBeenCalledTimes(2);
+    expect(fakeContext.log).toHaveBeenCalledWith('[timer-example] Timer trigger is running behind');
+    expect(fakeContext.log).toHaveBeenCalledWith(expect.stringContaining('[timer-example] Azure Function "Timer Trigger" ran at'));
     expect(result).toBeUndefined();
   });
 

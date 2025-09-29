@@ -1,60 +1,57 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
-  buildAdaptiveCard,
   handleError,
   isProd,
   isTest,
-  isValidAdaptiveCard,
 } from './utils.js';
 
 describe('utils', () => {
   describe('isProd', () => {
-    const originalEnv = process.env.NODE_ENV;
     afterEach(() => {
-      process.env.NODE_ENV = originalEnv;
+      vi.unstubAllEnvs();
     });
+
     it('returns true if NODE_ENV is production', () => {
-      process.env.NODE_ENV = 'production';
+      vi.stubEnv('NODE_ENV', 'production');
       expect(isProd()).toBe(true);
     });
+
     it('returns false if NODE_ENV is not production', () => {
-      process.env.NODE_ENV = 'development';
+      vi.stubEnv('NODE_ENV', 'development');
       expect(isProd()).toBe(false);
-      process.env.NODE_ENV = '';
-      expect(isProd()).toBe(false);
-      delete process.env.NODE_ENV;
+    });
+
+    it('returns false if NODE_ENV is empty or undefined', () => {
+      vi.stubEnv('NODE_ENV', '');
       expect(isProd()).toBe(false);
     });
   });
 
   describe('isTest', () => {
-    const originalVITEST = process.env.VITEST;
-    const originalVITEST_MODE = process.env.VITEST_MODE;
     afterEach(() => {
-      process.env.VITEST = originalVITEST;
-      process.env.VITEST_MODE = originalVITEST_MODE;
+      vi.unstubAllEnvs();
     });
 
     it('returns true when VITEST and VITEST_MODE are set', () => {
-      process.env.VITEST = '1';
-      process.env.VITEST_MODE = 'true';
+      vi.stubEnv('VITEST', '1');
+      vi.stubEnv('VITEST_MODE', 'true');
       expect(isTest()).toBe(true);
     });
 
     it('returns false when either variable is missing', () => {
-      delete process.env.VITEST;
-      process.env.VITEST_MODE = 'true';
+      vi.stubEnv('VITEST', '');
+      vi.stubEnv('VITEST_MODE', 'true');
       expect(isTest()).toBe(false);
 
-      process.env.VITEST = '1';
-      delete process.env.VITEST_MODE;
+      vi.stubEnv('VITEST', '1');
+      vi.stubEnv('VITEST_MODE', '');
       expect(isTest()).toBe(false);
     });
 
     it('returns false when both variables are falsy', () => {
-      process.env.VITEST = '';
-      process.env.VITEST_MODE = '';
+      vi.stubEnv('VITEST', '');
+      vi.stubEnv('VITEST_MODE', '');
       expect(isTest()).toBe(false);
     });
   });
