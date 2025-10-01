@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import { createMockContext } from './test-helpers.js';
 import {
   handleError,
   isProd,
@@ -12,19 +13,17 @@ describe('utils', () => {
       vi.unstubAllEnvs();
     });
 
-    it('returns true if NODE_ENV is production', () => {
-      vi.stubEnv('NODE_ENV', 'production');
-      expect(isProd()).toBe(true);
-    });
-
-    it('returns false if NODE_ENV is not production', () => {
-      vi.stubEnv('NODE_ENV', 'development');
-      expect(isProd()).toBe(false);
-    });
-
-    it('returns false if NODE_ENV is empty or undefined', () => {
-      vi.stubEnv('NODE_ENV', '');
-      expect(isProd()).toBe(false);
+    it.each([
+      ['production', true],
+      ['development', false],
+      ['test', false],
+      ['', false],
+      [undefined, false],
+    ])('returns %s when NODE_ENV is "%s"', (nodeEnv, expected) => {
+      if (nodeEnv !== undefined) {
+        vi.stubEnv('NODE_ENV', nodeEnv);
+      }
+      expect(isProd()).toBe(expected);
     });
   });
 
@@ -33,42 +32,51 @@ describe('utils', () => {
       vi.unstubAllEnvs();
     });
 
-    it('returns true when VITEST and VITEST_MODE are set', () => {
-      vi.stubEnv('VITEST', '1');
-      vi.stubEnv('VITEST_MODE', 'true');
-      expect(isTest()).toBe(true);
-    });
-
-    it('returns false when either variable is missing', () => {
-      vi.stubEnv('VITEST', '');
-      vi.stubEnv('VITEST_MODE', 'true');
-      expect(isTest()).toBe(false);
-
-      vi.stubEnv('VITEST', '1');
-      vi.stubEnv('VITEST_MODE', '');
-      expect(isTest()).toBe(false);
-    });
-
-    it('returns false when both variables are falsy', () => {
-      vi.stubEnv('VITEST', '');
-      vi.stubEnv('VITEST_MODE', '');
-      expect(isTest()).toBe(false);
+    it.each([
+      ['1', 'true', true, 'both environment variables are set'],
+      ['', 'true', false, 'VITEST is empty'],
+      ['1', '', false, 'VITEST_MODE is empty'],
+      ['', '', false, 'both variables are empty'],
+    ])('returns %s when %s', (vitest, vitestMode, expected, _description) => {
+      vi.stubEnv('VITEST', vitest);
+      vi.stubEnv('VITEST_MODE', vitestMode);
+      expect(isTest()).toBe(expected);
     });
   });
 
   describe('handleError', () => {
-    it('logs error to context.error if context is provided', () => {
+    it('logs error to context.error when context is provided', () => {
       const error = new Error('test error');
-      const context: { error: (e: unknown) => void } = { error: vi.fn() };
+      const context = createMockContext();
+
       handleError(error, context);
+
+      expect(context.error).toHaveBeenCalledOnce();
       expect(context.error).toHaveBeenCalledWith(error);
     });
-    it('logs error to console.error if context is not provided', () => {
+
+    it('logs error to console.error when context is null', () => {
       const error = new Error('console error');
-      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
       handleError(error, null);
-      expect(spy).toHaveBeenCalledWith(error);
-      spy.mockRestore();
+
+      expect(consoleSpy).toHaveBeenCalledOnce();
+      expect(consoleSpy).toHaveBeenCalledWith(error);
+
+      consoleSpy.mockRestore();
+    });
+
+    it('preserves the original error object', () => {
+      const error = new Error('original error');
+      error.stack = 'original stack trace';
+      const context = createMockContext();
+
+      handleError(error, context);
+
+      const calledError = (context.error as ReturnType<typeof vi.fn>).mock.calls[0][0] as Error;
+      expect(calledError.message).toBe('original error');
+      expect(calledError.stack).toBe('original stack trace');
     });
   });
 });
