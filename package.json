@@ -52,7 +52,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.7",
     "@types/node": "24.10.1",
-    "@vitest/coverage-v8": "4.0.12",
+    "@vitest/coverage-v8": "4.0.13",
     "azure-functions-core-tools": "4.5.0",
     "conventional-changelog": "7.1.1",
     "conventional-changelog-cli": "5.0.0",
