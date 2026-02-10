@@ -14,7 +14,7 @@ env:
   FUNCTION_APP_PATH: .
   FUNCTION_APP_SKU: flexconsumption
   FUNCTION_APP_SLOT_NAME: Production
-  NODE_VERSION: 22
+  NODE_VERSION: ${{ vars.NODE_VERSION}}
   PAGES_ARTIFACT_NAME: gh-pages-artifact
 
 jobs:
