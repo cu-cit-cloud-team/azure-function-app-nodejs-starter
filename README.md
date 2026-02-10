@@ -10,7 +10,7 @@ This template repo contains all the basics for starting a TypeScript Azure Funct
 
 ### Requirements
 
-- Node.js v22.x (with npm >= v10.x)
+- Node.js v24.x (with npm >= v11.x)
 - Azure Subscription
 
 #### Assumptions
@@ -77,9 +77,12 @@ configuration) can be setup and used to deploy your Function App to Azure.
     - [ ] The name of the function app you have already created and will be deploying to
     - [ ] The publish profile for the function app you will be deploying to
 1. Go to repo settings for [Actions secrets](https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/settings/secrets/actions)
-1. Click the `New repository secret` button
-    - Name: `AZURE_FUNCTIONAPP_PUBLISH_PROFILE`
-    - Value: use the contents of the function app's publish profile
+   1. Click the `New repository secret` button
+       - Name: `AZURE_FUNCTIONAPP_PUBLISH_PROFILE`
+       - Value: use the contents of the function app's publish profile
+1. Go to repo settings for [Actions variables](https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/settings/variables/actions)
+   1. Click the `New repository variable` button
+       - Name: `NODE_VERSION`
+       - Value: match the Node.js version your function app is configured to use (e.g. `24`)
 1. Edit `./.github/workflows/build-and-deploy.yml`
-    - change the value of `FUNCTION_APP_NAME` on line 21 to match your function app's name
-    - if desired, uncomment the lines that enable automatic deploys on PR merge (see workflow comments)
+    - change the value of `FUNCTION_APP_NAME` in the `env` block to match your function app's name
