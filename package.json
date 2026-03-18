@@ -51,7 +51,7 @@
     "dotenv": "17.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.7",
+    "@biomejs/biome": "2.4.8",
     "@types/node": "25.5.0",
     "@vitest/coverage-v8": "4.1.0",
     "azure-functions-core-tools": "4.8.0",
