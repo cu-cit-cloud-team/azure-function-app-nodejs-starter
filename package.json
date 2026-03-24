@@ -10,7 +10,8 @@
     "biome": "npx biome lint ./src/**/*.ts",
     "build": "npx tsc",
     "build:watch": "npx tsc --watch",
-    "changelog": "npx conventional-changelog -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "changelog": "npx conventional-changelog -p conventionalcommits -n changelog.config.mjs -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "changelog:preview": "npx conventional-changelog -p conventionalcommits -n changelog.config.mjs -u --stdout -i /dev/null",
     "clean": "npx rimraf dist",
     "declarations": "npx rimraf types/ && npx tsc --emitDeclarationOnly",
     "functions": "cross-env NODE_ENV=development func start",
@@ -45,7 +46,7 @@
     "node": ">= 24.x",
     "npm": ">= 11.x"
   },
-  "packageManager": "npm@11.11.1",
+  "packageManager": "npm@11.12.0",
   "dependencies": {
     "@azure/functions": "4.11.2",
     "dotenv": "17.3.1"
@@ -81,6 +82,6 @@
   },
   "volta": {
     "node": "24.14.0",
-    "npm": "11.11.1"
+    "npm": "11.12.0"
   }
 }
