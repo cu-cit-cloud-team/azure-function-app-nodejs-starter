@@ -91,7 +91,7 @@ jobs:
           name: ${{ env.COVERAGE_REPORT_ARTIFACT }}
 
       - name: 🏗️ Setup GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
