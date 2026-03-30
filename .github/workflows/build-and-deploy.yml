@@ -28,16 +28,16 @@ jobs:
 
     steps:
       - name: 👷 Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: 🏗️ Setup Node.js ${{ env.NODE_VERSION }} environment
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           check-latest: true
 
       - name: ⚡  Cache node_modules
-        uses: actions/cache@v5
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         id: cache
         with:
           path: ${{ env.FUNCTION_APP_PATH }}/node_modules
@@ -54,7 +54,7 @@ jobs:
         run: npm test
 
       - name: 📦 Create and upload build artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: ${{ env.COVERAGE_REPORT_ARTIFACT }}
           path: "./coverage"
@@ -64,7 +64,7 @@ jobs:
         run: npm run build
 
       - name: 🛫 Deploy function app to Azure
-        uses: Azure/functions-action@v1
+        uses: Azure/functions-action@ac2abfb0e49d12ed5d273a3cb39f01bdd1654c43 # v1.5.5
         with:
           app-name: ${{ env.FUNCTION_APP_NAME }}
           package: ${{ env.FUNCTION_APP_PATH }}
@@ -86,17 +86,17 @@ jobs:
 
     steps:
       - name: 📦 Download build artifact
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: ${{ env.COVERAGE_REPORT_ARTIFACT }}
 
       - name: 🏗️ Setup GitHub Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 📦 Create and upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: .
           name: ${{ env.PAGES_ARTIFACT_NAME }}
@@ -104,7 +104,7 @@ jobs:
 
       - name: 🚀 Deploy GitHub Pages artifact
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}
