@@ -2,12 +2,21 @@
   "name": "azure-function-app-nodejs-starter",
   "version": "1.1.0",
   "private": true,
+  "description": "Azure Function App starter template",
+  "bugs": {
+    "url": "https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/issues"
+  },
+  "author": {
+    "name": "Michael Sprague",
+    "email": "ms388@cornell.edu"
+  },
+  "repository": {
+    "url": "https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter"
+  },
   "type": "module",
   "main": "dist/src/**/*.js",
-  "description": "Azure Function App starter template",
   "scripts": {
     "azurite": "docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite",
-    "biome": "npx biome lint ./src/**/*.ts",
     "build": "npx tsc",
     "build:watch": "npx tsc --watch",
     "changelog": "npx conventional-changelog -p conventionalcommits -n changelog.config.mjs -i CHANGELOG.md -s && git add CHANGELOG.md",
@@ -16,7 +25,10 @@
     "declarations": "npx rimraf types/ && npx tsc --emitDeclarationOnly",
     "functions": "cross-env NODE_ENV=development func start",
     "functions:verbose": "cross-env NODE_ENV=development func start --verbose",
-    "lint": "npm run biome && npm run typecheck",
+    "format": "npx oxfmt src",
+    "format:check": "npx oxfmt --check src",
+    "lint": "npm run oxlint && npm run typecheck",
+    "oxlint": "npx oxlint src",
     "prebuild": "npm run clean",
     "prebuild:watch": "npm run clean",
     "prefunctions": "npm run clean && npm run build",
@@ -32,27 +44,11 @@
     "vitest:watch": "npx vitest run --watch",
     "vitest:coverage": "npx vitest run --coverage"
   },
-  "author": {
-    "name": "Michael Sprague",
-    "email": "ms388@cornell.edu"
-  },
-  "repository": {
-    "url": "https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter"
-  },
-  "bugs": {
-    "url": "https://github.com/cu-cit-cloud-team/azure-function-app-nodejs-starter/issues"
-  },
-  "engines": {
-    "node": ">= 24.x",
-    "npm": ">= 11.x"
-  },
-  "packageManager": "npm@11.12.0",
   "dependencies": {
     "@azure/functions": "4.14.0",
     "dotenv": "17.4.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.14",
     "@types/node": "25.6.0",
     "@vitest/coverage-v8": "4.1.5",
     "azure-functions-core-tools": "4.10.0",
@@ -60,6 +56,8 @@
     "conventional-changelog-conventionalcommits": "9.3.1",
     "cross-env": "10.1.0",
     "cz-git": "1.13.0",
+    "oxfmt": "0.48.0",
+    "oxlint": "1.63.0",
     "rimraf": "6.1.3",
     "tsx": "4.21.0",
     "typedoc": "0.28.19",
@@ -68,9 +66,9 @@
     "vitest": "4.1.5"
   },
   "overrides": {
-    "@conventional-changelog/git-client": "^2.6.0",
+    "@conventional-changelog/git-client": "^2.7.0",
     "@isaacs/brace-expansion": "^5.0.1",
-    "yauzl": "^3.2.1"
+    "yauzl": "^3.3.0"
   },
   "config": {
     "commitizen": {
@@ -80,8 +78,13 @@
   "release": {
     "preset": "conventionalcommits"
   },
+  "engines": {
+    "node": ">= 24.x",
+    "npm": ">= 11.x"
+  },
   "volta": {
-    "node": "24.14.0",
-    "npm": "11.12.0"
-  }
+    "node": "24.15.0",
+    "npm": "11.13.0"
+  },
+  "packageManager": "npm@11.13.0"
 }
