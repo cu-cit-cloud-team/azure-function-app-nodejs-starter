@@ -49,7 +49,7 @@
     "dotenv": "17.4.2"
   },
   "devDependencies": {
-    "@types/node": "25.7.0",
+    "@types/node": "25.8.0",
     "@vitest/coverage-v8": "4.1.6",
     "azure-functions-core-tools": "4.10.0",
     "conventional-changelog": "7.2.0",
