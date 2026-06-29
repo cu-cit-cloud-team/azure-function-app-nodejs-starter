@@ -65,11 +65,6 @@
     "typescript": "6.0.3",
     "vitest": "4.1.9"
   },
-  "overrides": {
-    "@conventional-changelog/git-client": "^2.7.0",
-    "@isaacs/brace-expansion": "^5.0.1",
-    "yauzl": "^3.3.0"
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-git"
@@ -83,8 +78,12 @@
     "npm": ">= 11.x"
   },
   "volta": {
-    "node": "24.15.0",
-    "npm": "11.13.0"
+    "node": "24.18.0",
+    "npm": "11.18.0"
   },
-  "packageManager": "npm@11.13.0"
+  "packageManager": "npm@11.18.0",
+  "allowScripts": {
+    "azure-functions-core-tools@4.12.1": true,
+    "esbuild@0.28.1": true
+  }
 }
