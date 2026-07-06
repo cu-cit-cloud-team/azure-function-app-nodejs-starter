@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@types/node": "26.1.0",
-    "@vitest/coverage-v8": "4.1.9",
+    "@vitest/coverage-v8": "4.1.10",
     "azure-functions-core-tools": "4.12.1",
     "conventional-changelog": "8.0.0",
     "conventional-changelog-conventionalcommits": "10.2.1",
