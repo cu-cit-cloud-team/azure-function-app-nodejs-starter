@@ -10,7 +10,7 @@
     "dist/**",
     "node_modules/**",
     "types/**",
-    "../**/scratch.ts"
+    "**/scratch.ts"
   ],
   "plugins": ["eslint", "react", "typescript", "unicorn"],
   "rules": {
