@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@azure/functions": "4.16.5",
-    "dotenv": "18.0.1"
+    "dotenv": "18.0.2"
   },
   "devDependencies": {
     "@types/node": "26.6.2",
