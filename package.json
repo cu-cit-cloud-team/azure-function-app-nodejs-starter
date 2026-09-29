@@ -49,7 +49,7 @@
     "dotenv": "18.0.3"
   },
   "devDependencies": {
-    "@types/node": "26.6.2",
+    "@types/node": "26.6.3",
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitest/coverage-v8": "5.0.2",
     "azure-functions-core-tools": "4.15.1",
